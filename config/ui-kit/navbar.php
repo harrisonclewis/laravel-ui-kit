@@ -5,10 +5,10 @@ return [
         'view' => 'components.navbar.root',
         'classes' => [
             'root' => 'h-11 flex items-center z-10',
-            'container' => 'px-2 flex-grow flex justify-between',
+            'container' => 'px-2 grow flex justify-between',
             'menu' => 'space-x-2',
             'left-menu' => 'flex items-center',
-            'center-menu' => 'flex-grow hidden md:flex items-center',
+            'center-menu' => 'grow hidden md:flex items-center',
             'right-menu' => 'hidden md:flex items-center',
             'burger' => 'flex md:hidden',
         ],

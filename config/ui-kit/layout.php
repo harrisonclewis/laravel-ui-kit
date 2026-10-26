@@ -4,7 +4,7 @@ return [
     'card' => [
         'view' => 'components.layout.card',
         'classes' => [
-            'root' => 'block border shadow-sm rounded-xl',
+            'root' => 'block border shadow-[0_1px_2px_0_rgb(0_0_0_/_0.05)] rounded-xl',
         ],
         'props' => [
             'as' => 'div',

@@ -4,7 +4,7 @@ return [
     'alert' => [
         'view' => 'components.alert.root',
         'classes' => [
-            'root' => 'shadow-sm rounded-xl border',
+            'root' => 'shadow-[0_1px_2px_0_rgb(0_0_0_/_0.05)] rounded-xl border',
         ],
         'props' => [
             'as' => 'div',
