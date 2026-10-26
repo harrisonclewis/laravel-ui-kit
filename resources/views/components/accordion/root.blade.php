@@ -10,7 +10,7 @@
 @endphp
 
 <div {{ $attributes->merge(['class' => $classes]) }} x-data="{ selected: null }">
-    <ul class="list-none" role="list" @click="open = !open">
+    <ul class="list-none" role="list">
         {{ $slot }}
     </ul>
 </div>
