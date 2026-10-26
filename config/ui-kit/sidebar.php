@@ -14,7 +14,7 @@ return [
             'container-hidden' => '-translate-x-full',
             'close' => 'absolute top-2 -right-8 z-30',
             'content' => 'p-5 overflow-y-auto flex flex-col h-full',
-            'content-top' => 'flex-grow',
+            'content-top' => 'grow',
             'content-bottom' => '',
             'open-body' => '',
         ],
@@ -41,7 +41,7 @@ return [
             ],
             'variant' => [
                 'inline-md' => [
-                    'root' => 'md:flex-shrink-0',
+                    'root' => 'md:shrink-0',
                     'container' => 'md:left-auto',
                     'open-body' => 'overflow-hidden md:overflow-auto',
                     'close' => 'md:hidden',
@@ -50,7 +50,7 @@ return [
                     'overlay' => 'md:relative',
                 ],
                 'inline-lg' => [
-                    'root' => 'lg:flex-shrink-0',
+                    'root' => 'lg:shrink-0',
                     'container' => 'lg:left-auto',
                     'open-body' => 'overflow-hidden lg:overflow-auto',
                     'close' => 'lg:hidden',
@@ -59,7 +59,7 @@ return [
                     'overlay' => 'lg:relative',
                 ],
                 'inline-xl' => [
-                    'root' => 'xl:flex-shrink-0',
+                    'root' => 'xl:shrink-0',
                     'container' => 'xl:left-auto',
                     'open-body' => 'overflow-hidden xl:overflow-auto',
                     'close' => 'xl:hidden',
@@ -91,7 +91,7 @@ return [
             ],
             'color' => [
                 'default' => [
-                    'overlay' => 'bg-zinc-500 bg-opacity-50 dark:bg-zinc-500 dark:bg-opacity-50',
+                    'overlay' => 'bg-zinc-500/50 dark:bg-zinc-500/50',
                     'burger' => 'font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700',
                     'container' => 'bg-zinc-100 dark:bg-zinc-900',
                     'close' => 'text-zinc-700 dark:text-zinc-300',

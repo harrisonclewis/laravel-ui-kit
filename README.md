@@ -16,44 +16,99 @@ You can install Laravel UI Kit via Composer. Run the following command:
 composer require laravel-ui-kit/laravel-ui-kit
 ```
 
-### Install TailwindCSS
+### Supported versions
 
-Ensure that TailwindCSS is installed in your Laravel project. If you're using starter kits like Jetstream or Breeze, TailwindCSS is included by default. Otherwise, follow the official TailwindCSS documentation for Laravel installation:
+| Dependency | Supported versions |
+| --- | --- |
+| PHP | 8.2+ (Laravel 13 requires 8.3+) |
+| Laravel | 10, 11, 12, 13 |
+| Tailwind CSS | 3.4, 4.x |
+| Alpine.js | 3.x (bundled with Livewire 3 and 4) |
+| Livewire (optional) | 3.x, 4.x |
 
-[Install TailwindCSS with Laravel](https://tailwindcss.com/docs/guides/laravel)
+Laravel 10 and 11 are retained for legacy compatibility. Use Laravel 12 or 13 for new applications.
 
-### Install AlpineJS
+The components are Blade views. Livewire is only needed when you use `wire:*` bindings.
+Laravel discovers the service provider automatically.
 
-Verify that AlpineJS is installed in your Laravel project. It's included by default if you're using Jetstream, Breeze, or Livewire. For manual installation, refer to the AlpineJS documentation:
+### Install Tailwind CSS 4
 
-[Install AlpineJS with Laravel](https://alpinejs.dev/essentials/installation)
+Follow the [Tailwind CSS Laravel/Vite installation guide](https://tailwindcss.com/docs/installation/framework-guides/laravel/vite).
+In `resources/css/app.css`, register the package configuration and views explicitly because Tailwind does not scan vendor files by default:
 
-### Update TailwindCSS config
+```css
+@import "tailwindcss";
 
-TailwindCSS requires paths to all HTML templates, JavaScript components, and other source files containing Tailwind class names.
+@source "../../vendor/laravel-ui-kit/laravel-ui-kit/config/**/*.php";
+@source "../../vendor/laravel-ui-kit/laravel-ui-kit/resources/views/**/*.blade.php";
+@source "../../config/ui-kit.php";
+@source "../../config/ui-kit/**/*.php";
+@source "../views/**/*.blade.php";
 
-Add the following paths to your `tailwind.config.js` file:
+/* Include this if your application toggles dark mode with a .dark class. */
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+Paths are relative to `resources/css/app.css`. Both the configuration files and Blade
+views contain utility classes and must be scanned, including published overrides.
+
+For styled checkboxes, radio buttons, and select controls, install the
+[Tailwind forms plugin](https://github.com/tailwindlabs/tailwindcss-forms):
+
+```bash
+npm install -D @tailwindcss/forms
+```
+
+```css
+@plugin "@tailwindcss/forms";
+```
+
+### Tailwind CSS 3.4
+
+Existing applications can keep Tailwind CSS 3.4. Include these paths in `tailwind.config.js`:
 
 ```javascript
-/* tailwind.config.js */
-
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './config/ui-kit.php',
-        './vendor/laravel-ui-kit/laravel-ui-kit/config/ui-kit.php',
+        './config/ui-kit/**/*.php',
+        './vendor/laravel-ui-kit/laravel-ui-kit/config/**/*.php',
+        './vendor/laravel-ui-kit/laravel-ui-kit/resources/views/**/*.blade.php',
     ],
-    // ... rest of your config
+    // Add @tailwindcss/forms to your plugins if styling form controls.
 };
 ```
 
-This configuration ensures that TailwindCSS processes all necessary files, including those from Laravel UI Kit.
+### Alpine.js and Livewire
 
-### For older Laravel versions (<5.5)
+Interactive components use Alpine.js 3. Livewire 3 and 4 already include Alpine;
+do not load a second copy. For Blade-only applications, follow the
+[Alpine.js installation guide](https://alpinejs.dev/essentials/installation).
 
-For Laravel versions prior to 5.5, you need to manually register the service provider and facade.
+Attributes such as `wire:model.live`, `wire:click`, and `wire:loading` are forwarded
+to the underlying form controls and buttons:
+
+```blade
+<x-input wire:model.live="name" />
+<x-button wire:click="save" wire:loading.attr="disabled">Save</x-button>
+```
+
+### Publishing configuration and views
+
+```bash
+php artisan vendor:publish --provider="LaravelUiKit\LaravelUiKitServiceProvider" --tag=config
+php artisan vendor:publish --provider="LaravelUiKit\LaravelUiKitServiceProvider" --tag=views
+```
+
+The configuration includes `config/ui-kit.php` and the `config/ui-kit/` directory.
+When upgrading an application with published configuration or views, merge the package
+changes into those overrides. Replace removed Tailwind utilities such as `bg-opacity-50`
+with color opacity modifiers such as `bg-zinc-500/50`, and `flex-grow` / `flex-shrink-0`
+with `grow` / `shrink-0`. See the [Tailwind CSS upgrade guide](https://tailwindcss.com/docs/upgrade-guide)
+for other application-level changes.
 
 ## Usage
 
@@ -63,7 +118,14 @@ For usage and examples, please visit our documentation:
 
 ### Testing
 
-TBD
+```bash
+composer install
+composer test
+```
+
+Tests cover component rendering, configuration publishing, class merging, form method
+spoofing, and Livewire state updates. GitHub Actions tests Laravel 10–13 with the
+matching Orchestra Testbench and PHPUnit versions, including Livewire 3 and 4.
 
 ### Changelog
 

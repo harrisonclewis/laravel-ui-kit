@@ -6,7 +6,7 @@ return [
         'classes' => [
             'root' => 'relative',
             'trigger' => '',
-            'container' => 'absolute z-50 shadow-xl mt-2 origin-top-right rounded-xl border ring-inset focus:outline-none p-1',
+            'container' => 'absolute z-50 shadow-xl mt-2 origin-top-right rounded-xl border ring-inset focus:outline focus:outline-2 focus:outline-transparent focus:outline-offset-2 p-1',
             'menu' => 'rounded-xl'
         ],
         'props' => [

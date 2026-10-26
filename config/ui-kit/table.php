@@ -82,7 +82,7 @@ return [
         'view' => 'components.table.td',
         'classes' => [
             'root' => 'relative whitespace-nowrap text-sm border-b',
-            'href' => 'absolute inset-0 focus:outline-none',
+            'href' => 'absolute inset-0 focus:outline focus:outline-2 focus:outline-transparent focus:outline-offset-2',
         ],
         'props' => [
             'as' => 'td',

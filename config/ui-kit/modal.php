@@ -5,7 +5,7 @@ return [
         'view' => 'components.modal.root',
         'classes' => [
             'root' => 'relative w-full overflow-y-auto shadow-2xl rounded-3xl p-[0.060rem]',
-            'overlay' => 'fixed inset-0 bg-neutral-950 bg-opacity-50',
+            'overlay' => 'fixed inset-0 bg-neutral-950/50',
             'container' => 'rounded-3xl p-10',
         ],
         'props' => [

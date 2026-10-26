@@ -16,7 +16,7 @@ return [
         'classes' => [
             'root' => 'text-sm ml-2',
             'container' => 'flex items-center',
-            'icon' => 'flex-shrink-0 w-5 h-5 group-first:hidden',
+            'icon' => 'shrink-0 w-5 h-5 group-first:hidden',
         ],
         'props' => [
             'color' => 'default',

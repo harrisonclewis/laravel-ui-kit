@@ -225,7 +225,7 @@ return [
                 'sm' => 'px-2 py-1 text-sm h-7',
                 'md' => 'px-4 py-2 text-base h-9',
                 'lg' => 'px-5 py-3 text-lg h-11',
-                'xl' => 'px-6 py-4 text-xl h-13',
+                'xl' => 'px-6 py-4 text-xl h-[3.25rem]',
                 'none' => '',
             ],
         ],

@@ -1,0 +1,65 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.2'
+            laravel: '10.*'
+            testbench: '8.*'
+            phpunit: '^10.5'
+            livewire: '^3.0'
+          - php: '8.2'
+            laravel: '11.*'
+            testbench: '9.*'
+            phpunit: '^11.5'
+            livewire: '^3.0'
+          - php: '8.2'
+            laravel: '12.*'
+            testbench: '10.*'
+            phpunit: '^11.5'
+            livewire: '^3.0'
+          - php: '8.2'
+            laravel: '12.*'
+            testbench: '10.*'
+            phpunit: '^11.5'
+            livewire: '^4.0'
+          - php: '8.3'
+            laravel: '13.*'
+            testbench: '11.*'
+            phpunit: '^12.5'
+            livewire: '^4.0'
+          - php: '8.5'
+            laravel: '13.*'
+            testbench: '11.*'
+            phpunit: '^13.0'
+            livewire: '^4.0'
+    name: Laravel ${{ matrix.laravel }} / PHP ${{ matrix.php }} / Livewire ${{ matrix.livewire }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, fileinfo, pdo_sqlite
+          coverage: none
+          tools: composer:v2
+      - run: composer validate --strict
+      - name: Install dependencies
+        # Laravel 10/11 are legacy compatibility targets with unpatched advisories.
+        # Permit those only in these test jobs; keep Composer's audit reporting enabled.
+        env:
+          COMPOSER_NO_SECURITY_BLOCKING: ${{ (matrix.laravel == '10.*' || matrix.laravel == '11.*') && '1' || '0' }}
+        run: >-
+          composer update --prefer-dist --no-interaction
+          --with "laravel/framework:${{ matrix.laravel }}"
+          --with "orchestra/testbench:${{ matrix.testbench }}"
+          --with "phpunit/phpunit:${{ matrix.phpunit }}"
+          --with "livewire/livewire:${{ matrix.livewire }}"
+      - run: composer test

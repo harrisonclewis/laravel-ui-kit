@@ -13,7 +13,7 @@ return [
         ],
         'options' => [
             'color' => [
-                'primary' => ['text-white bg-zinc-800 border-zinc-700 hover:bg-opacity-80 dark:bg-zinc-500 dark:border-zinc-400 dark:hover:bg-opacity-80'],
+                'primary' => ['text-white bg-zinc-800 border-zinc-700 hover:bg-zinc-800/80 dark:bg-zinc-500 dark:border-zinc-400 dark:hover:bg-zinc-500/80'],
                 'secondary' => ['text-zinc-700 bg-white border-zinc-200 hover:bg-zinc-50 dark:text-white dark:bg-transparent dark:border-zinc-600 dark:hover:bg-zinc-600/20'],
                 'transparent' => ['text-zinc-700 bg-transparent border-transparent hover:border-zinc-200 dark:text-zinc-300 dark:hover:border-zinc-600'],
                 'slate' => ['text-white bg-slate-600 border-slate-700 hover:bg-slate-700 dark:bg-slate-500 dark:border-slate-400 dark:hover:bg-slate-600'],
@@ -44,8 +44,8 @@ return [
                 'xs' => 'px-1 py-1 text-xs h-6',
                 'sm' => 'px-3 py-1 text-sm h-7',
                 'md' => 'px-4 py-2 text-sm h-9',
-                'lg' => 'px-5 py-3 text-md h-11',
-                'xl' => 'px-6 py-4 text-md h-13',
+                'lg' => 'px-5 py-3 text-base h-11',
+                'xl' => 'px-6 py-4 text-base h-[3.25rem]',
             ],
         ],
     ],
